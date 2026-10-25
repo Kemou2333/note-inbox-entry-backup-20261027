@@ -1,13 +1,45 @@
 # 拾笺 · Note Inbox
 
-[打开 Note Inbox](https://kemou2333.github.io/note-inbox/) · [旧网址仍可用](https://kemou2333.github.io/campus-inbox/) · [阿里云主站](https://123.57.30.129/)
+把大学群里的长通知拆成清楚的待办卡片，边看要求边记进度。
 
-把群通知变成清楚的待办：粘贴通知、AI 整理、逐项完成，也能提问、记笔记和同步进度。
+[打开网页版](https://kemou2333.github.io/note-inbox/) · [备用网页](https://123.57.30.129/) · [安卓下载](https://123.57.30.129/downloads/android-v2.28.1/campus-inbox-2.28.1.apk) · [GitHub备用下载](https://github.com/Kemou2333/campus-inbox/releases/latest)
 
-本仓库维护新的官方网页入口，应用源码、问题反馈和安卓更新保留在 [campus-inbox](https://github.com/Kemou2333/campus-inbox)，兼容旧网址和旧版安装包。两个 GitHub 网页路径共用同一来源的本机数据，打开哪个路径就留在哪个路径。
+大学群里的课程、报名和材料通知常常很长，看完容易忘，回头找截止时间和群号又得翻半天聊天记录。把通知粘贴进拾笺，服务端会调用 DeepSeek 理出简短说明、时间、适用人群和办理步骤。展开卡片就能打勾记进度、贴彩色便签写备注，底部留着整条原文方便核对，也能围绕通知提问或导出长图。
 
-网页从指定的公开源码提交构建，不复制后台或安卓签名密钥；发布工作流由维护者在新版本完成后手动触发，不定时轮询。
+## 界面预览
 
-通知原文会发给第三方 DeepSeek 处理，请勿粘贴敏感个人信息。首次提示后，可从设置 → 工具与帮助 → 隐私说明查看。
+![展开通知并记录进度](https://raw.githubusercontent.com/Kemou2333/campus-inbox/main/docs/media/product-demo.gif)
 
-Kemou 制作 · [AGPL-3.0](LICENSE)
+![桌面端通知与办理步骤](https://raw.githubusercontent.com/Kemou2333/campus-inbox/main/docs/media/desktop.png)
+
+<img src="https://raw.githubusercontent.com/Kemou2333/campus-inbox/main/docs/media/mobile.png" width="320" alt="手机网页通知列表" />
+
+*注：上方动图与截图均取自已发布产品的实际界面，内容为脱敏后的人工整理展示示例，不作为模型准确率证明。*
+
+## 主要功能
+
+* **理清通知重点**：提取通知中的简短说明、截止时间、适用人群、分步要求和注意事项。
+
+* **边看边记进度**：在同一张卡片里勾选步骤、写彩色便签、收藏或搜索通知，少在聊天记录和待办软件之间来回切换。
+
+* **核对、追问与同步**：保留完整原文供核对，支持围绕通知提问、本机导出长图，登录后可在网页与安卓端同步文字、笔记和进度（安卓另有本机提醒）。
+
+## 实现概览
+
+网页与安卓共用核心界面；用户粘贴通知后，服务端调用第三方 DeepSeek 转为结构化字段，经程序校验格式与边界后展示为待办卡片。
+
+```mermaid
+flowchart LR
+    A[粘贴通知] --> B[服务端调用 DeepSeek]
+    B --> C[检查并整理结果]
+    C --> D[待办卡片与个人记录]
+
+```
+
+## 使用前须知
+
+原文与提问会发给第三方 DeepSeek 处理，请勿输入身份证号、手机号等敏感信息。AI 可能漏读或理解有误，重要事项请核对原通知。工具不自动读群聊或代填表单；图片与附件通常留在本机。[隐私说明](https://github.com/Kemou2333/campus-inbox/blob/main/docs/PRIVACY.md)。
+
+韩镇声（Kemou）制作 · [AGPL-3.0-only](LICENSE)
+
+[源码与文档](https://github.com/Kemou2333/campus-inbox)
